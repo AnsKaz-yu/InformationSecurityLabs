@@ -2,45 +2,119 @@ from collections import Counter, defaultdict
 import math
 
 
-ENGLISH_FREQUENCIES = {
-    "A": 8.167,
-    "B": 1.492,
-    "C": 2.782,
-    "D": 4.253,
-    "E": 12.702,
-    "F": 2.228,
-    "G": 2.015,
-    "H": 6.094,
-    "I": 6.966,
-    "J": 0.153,
-    "K": 0.772,
-    "L": 4.025,
-    "M": 2.406,
-    "N": 6.749,
-    "O": 7.507,
-    "P": 1.929,
-    "Q": 0.095,
-    "R": 5.987,
-    "S": 6.327,
-    "T": 9.056,
-    "U": 2.758,
-    "V": 0.978,
-    "W": 2.360,
-    "X": 0.150,
-    "Y": 1.974,
-    "Z": 0.074,
+LATIN_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+CYRILLIC_ALPHABET = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
+
+STATIC_FREQUENCIES = {
+    "en": {
+        "A": 8.167,
+        "B": 1.492,
+        "C": 2.782,
+        "D": 4.253,
+        "E": 12.702,
+        "F": 2.228,
+        "G": 2.015,
+        "H": 6.094,
+        "I": 6.966,
+        "J": 0.153,
+        "K": 0.772,
+        "L": 4.025,
+        "M": 2.406,
+        "N": 6.749,
+        "O": 7.507,
+        "P": 1.929,
+        "Q": 0.095,
+        "R": 5.987,
+        "S": 6.327,
+        "T": 9.056,
+        "U": 2.758,
+        "V": 0.978,
+        "W": 2.360,
+        "X": 0.150,
+        "Y": 1.974,
+        "Z": 0.074,
+    },
+    "ru": {
+        "А": 8.01,
+        "Б": 1.59,
+        "В": 4.54,
+        "Г": 1.70,
+        "Д": 2.98,
+        "Е": 8.45,
+        "Ё": 0.04,
+        "Ж": 0.94,
+        "З": 1.65,
+        "И": 7.35,
+        "Й": 1.21,
+        "К": 3.49,
+        "Л": 4.40,
+        "М": 3.21,
+        "Н": 6.70,
+        "О": 10.97,
+        "П": 2.81,
+        "Р": 4.73,
+        "С": 5.47,
+        "Т": 6.26,
+        "У": 2.62,
+        "Ф": 0.26,
+        "Х": 0.97,
+        "Ц": 0.48,
+        "Ч": 1.44,
+        "Ш": 0.73,
+        "Щ": 0.36,
+        "Ъ": 0.04,
+        "Ы": 1.90,
+        "Ь": 1.74,
+        "Э": 0.32,
+        "Ю": 0.64,
+        "Я": 2.01,
+    },
 }
 
-def Kasiski(ciphertext, min_length=4, max_length=4, max_key_length=20):
+
+def clean_text(text, alphabet):
+    alphabet_set = set(alphabet)
+    return "".join(char.upper() for char in text if char.upper() in alphabet_set)
+
+
+def get_language_profile(ciphertext, source_encoding="utf-8"):
+    encoding = (source_encoding or "").lower()
+
+    if any(tag in encoding for tag in ("1251", "koi8", "cp866")):
+        language_code = "ru"
+        alphabet = CYRILLIC_ALPHABET
+    elif any(tag in encoding for tag in ("1252", "iso-8859-1", "latin", "ascii")):
+        language_code = "en"
+        alphabet = LATIN_ALPHABET
+    else:
+        upper = ciphertext.upper()
+        cyrillic_count = sum("А" <= char <= "Я" or char == "Ё" for char in upper)
+        latin_count = sum("A" <= char <= "Z" for char in upper)
+        if cyrillic_count > latin_count:
+            language_code = "ru"
+            alphabet = CYRILLIC_ALPHABET
+        else:
+            language_code = "en"
+            alphabet = LATIN_ALPHABET
+
+    frequencies = {char: STATIC_FREQUENCIES[language_code].get(char, 0.01) for char in alphabet}
+
+    return {
+        "language_code": language_code,
+        "alphabet": alphabet,
+        "frequencies": frequencies,
+    }
+
+
+def Kasiski(ciphertext, alphabet, min_length=4, max_length=4, max_key_length=20):
     if min_length < 2:
         raise ValueError("min_length должен быть не меньше 2")
     if max_length < min_length:
         raise ValueError("max_length должен быть больше или равен min_length")
 
-    text = "".join(ch for ch in ciphertext.upper() if ch.isalpha())
+    text = clean_text(ciphertext, alphabet)
 
     sequence_positions = defaultdict(list)
-
     for ngram_length in range(min_length, max_length + 1):
         for index in range(len(text) - ngram_length + 1):
             sequence = text[index:index + ngram_length]
@@ -53,7 +127,6 @@ def Kasiski(ciphertext, min_length=4, max_length=4, max_key_length=20):
     }
 
     distances = []
-
     for positions in repeated_sequences.values():
         for i in range(len(positions) - 1):
             distance = positions[i + 1] - positions[i]
@@ -61,7 +134,6 @@ def Kasiski(ciphertext, min_length=4, max_length=4, max_key_length=20):
                 distances.append(distance)
 
     factor_counts = Counter()
-
     for distance in distances:
         limit = min(max_key_length, int(math.sqrt(distance)) + 1)
         for factor in range(2, limit):
@@ -74,15 +146,12 @@ def Kasiski(ciphertext, min_length=4, max_length=4, max_key_length=20):
         if distance <= max_key_length:
             factor_counts[distance] += 1
 
-    sorted_counts = sorted(
-        factor_counts.items(),
-        key=lambda item: (-item[1], item[0])
-    )
+    sorted_counts = sorted(factor_counts.items(), key=lambda item: (-item[1], item[0]))
     return {key_length: count for key_length, count in sorted_counts}
 
 
-def index_of_coincidence(text):
-    cleaned = "".join(ch.upper() for ch in text if ch.isalpha())
+def index_of_coincidence(text, alphabet):
+    cleaned = clean_text(text, alphabet)
     n = len(cleaned)
     if n < 2:
         return 0.0
@@ -93,10 +162,10 @@ def index_of_coincidence(text):
     return numerator / denominator
 
 
-def friedman_key_length_candidates(ciphertext, max_key_length=20, top_n=5):
-    cleaned = "".join(ch.upper() for ch in ciphertext if ch.isalpha())
+def friedman_key_length_candidates(ciphertext, alphabet, max_key_length=20, top_n=5):
+    cleaned = clean_text(ciphertext, alphabet)
     if len(cleaned) < 2:
-        return []
+        return {}
 
     scores = []
     upper_bound = min(max_key_length, len(cleaned))
@@ -106,64 +175,31 @@ def friedman_key_length_candidates(ciphertext, max_key_length=20, top_n=5):
         if not non_empty_columns:
             continue
 
-        avg_ioc = sum(index_of_coincidence(column) for column in non_empty_columns) / len(non_empty_columns)
+        avg_ioc = sum(index_of_coincidence(column, alphabet) for column in non_empty_columns) / len(non_empty_columns)
         scores.append((key_length, avg_ioc))
 
     scores.sort(key=lambda item: (-item[1], item[0]))
     return {key_length: avg_ioc for key_length, avg_ioc in scores[:top_n]}
 
 
-def combined_key_length_candidates(
-    ciphertext,
-    max_key_length=20,
-    top_n=10,
-    kasiski_min_length=4,
-    kasiski_max_length=4,
-):
-    kasiski_scores_raw = Kasiski(
-        ciphertext,
-        min_length=kasiski_min_length,
-        max_length=kasiski_max_length,
-        max_key_length=max_key_length,
-    )
-    friedman_scores_raw = friedman_key_length_candidates(
-        ciphertext,
-        max_key_length=max_key_length,
-        top_n=max_key_length,
-    )
+def text_chi_squared(text, frequencies, alphabet):
+    cleaned_text = clean_text(text, alphabet)
+    if not cleaned_text:
+        return float("inf")
 
-    combined_scores = defaultdict(float)
-
-    max_factor_count = max(kasiski_scores_raw.values(), default=0)
-    for rank, key_length in enumerate(kasiski_scores_raw.keys(), start=1):
-        rank_score = 1 / rank
-        count_score = (kasiski_scores_raw.get(key_length, 0) / max_factor_count) if max_factor_count else 0.0
-        combined_scores[key_length] += 0.7 * rank_score + 0.3 * count_score
-
-    if friedman_scores_raw:
-        ioc_values = list(friedman_scores_raw.values())
-        min_ioc = min(ioc_values)
-        max_ioc = max(ioc_values)
-        ioc_range = max_ioc - min_ioc
-
-        for rank, (key_length, avg_ioc) in enumerate(friedman_scores_raw.items(), start=1):
-            rank_score = 1 / rank
-            if ioc_range > 0:
-                ioc_score = (avg_ioc - min_ioc) / ioc_range
-            else:
-                ioc_score = 0.0
-            combined_scores[key_length] += 0.7 * rank_score + 0.3 * ioc_score
-
-    ranked = sorted(
-        combined_scores.items(),
-        key=lambda item: (-item[1], item[0])
-    )
-
-    return {key_length: score for key_length, score in ranked[:top_n]}
+    observed = Counter(cleaned_text)
+    text_length = len(cleaned_text)
+    score = 0.0
+    for char in alphabet:
+        expected_percent = frequencies.get(char, 0)
+        expected_count = (expected_percent / 100) * text_length
+        if expected_count > 0:
+            observed_count = observed.get(char, 0)
+            score += ((observed_count - expected_count) ** 2) / expected_count
+    return score
 
 
-def _column_shift_score(column_text, shift, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
-    alphabet = alphabet.upper()
+def _column_shift_score(column_text, shift, frequencies, alphabet):
     index_by_char = {char: index for index, char in enumerate(alphabet)}
     alphabet_size = len(alphabet)
 
@@ -173,22 +209,22 @@ def _column_shift_score(column_text, shift, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ
             decrypted_index = (index_by_char[char] - shift) % alphabet_size
             decrypted_column.append(alphabet[decrypted_index])
 
-    return text_chi_squared("".join(decrypted_column), alphabet=alphabet)
+    return text_chi_squared("".join(decrypted_column), frequencies, alphabet)
 
 
 def estimate_vigenere_key_candidates(
     ciphertext,
     key_length,
+    frequencies,
+    alphabet,
     top_shifts_per_column=3,
     max_candidates=10,
-    alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ",
 ):
     if key_length < 1:
         raise ValueError("key_length должен быть не меньше 1")
 
-    alphabet = alphabet.upper()
     index_by_char = {char: index for index, char in enumerate(alphabet)}
-    text = "".join(ch.upper() for ch in ciphertext if ch.upper() in index_by_char)
+    text = "".join(char.upper() for char in ciphertext if char.upper() in index_by_char)
     columns = [text[index::key_length] for index in range(key_length)]
     alphabet_size = len(alphabet)
 
@@ -196,7 +232,7 @@ def estimate_vigenere_key_candidates(
     for column in columns:
         shift_scores = []
         for shift in range(alphabet_size):
-            score = _column_shift_score(column, shift, alphabet=alphabet)
+            score = _column_shift_score(column, shift, frequencies, alphabet)
             shift_scores.append((shift, score))
 
         shift_scores.sort(key=lambda item: item[1])
@@ -213,13 +249,14 @@ def estimate_vigenere_key_candidates(
         candidates = next_candidates[:max_candidates]
 
     return candidates
-def decrypt_vigenere(ciphertext, key, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
+
+
+def decrypt_vigenere(ciphertext, key, alphabet):
     if not key:
         raise ValueError("key не должен быть пустым")
 
-    alphabet = alphabet.upper()
     index_by_char = {char: index for index, char in enumerate(alphabet)}
-    key_indexes = [index_by_char[ch.upper()] for ch in key if ch.upper() in index_by_char]
+    key_indexes = [index_by_char[char.upper()] for char in key if char.upper() in index_by_char]
     if not key_indexes:
         raise ValueError("key не содержит символов выбранного алфавита")
 
@@ -241,21 +278,3 @@ def decrypt_vigenere(ciphertext, key, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
             result.append(char)
 
     return "".join(result)
-
-
-def text_chi_squared(text, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
-    alphabet = alphabet.upper()
-    cleaned_text = "".join(ch.upper() for ch in text if ch.upper() in alphabet)
-    if not cleaned_text:
-        return float("inf")
-
-    observed = Counter(cleaned_text)
-    text_length = len(cleaned_text)
-    score = 0.0
-    for char in alphabet:
-        expected_percent = ENGLISH_FREQUENCIES.get(char, 0)
-        expected_count = (expected_percent / 100) * text_length
-        if expected_count > 0:
-            observed_count = observed.get(char, 0)
-            score += ((observed_count - expected_count) ** 2) / expected_count
-    return score
