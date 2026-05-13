@@ -1,0 +1,338 @@
+Crib-dragging report (OTP reuse / multi-time pad)
+ciphertexts=3 common_len=19563
+
+Pair Plaintext 1 ^ Plaintext 2
+  crib=' the ' (assuming it is in Plaintext 1)
+    offset=   0: 't%t<
+    offset=   1:  9yy-
+    offset=   2: methi
+    offset=   3: 1he,=
+    offset=   4: <y!xb
+    offset=   5: -=u'r
+    offset=   6: ii*7'
+    offset=   7: =6:b4
+    offset=   8: b&oq+
+    offset=   9: rs|n1
+  crib=' and ' (assuming it is in Plaintext 1)
+    offset=   0: 'a#u<
+    offset=   2: mprii
+    offset=   3: 1}c-=
+    offset=   4: <l'yb
+    offset=   5: -(s&r
+    offset=   6: i|,6'
+    offset=   7: =#<c4
+    offset=   8: b3ip+
+    offset=   9: rfzo1
+    offset=  10: 'ueur
+  crib=' to ' (assuming it is in Plaintext 1)
+    offset=   0: 't"1
+    offset=   1:  9~<
+    offset=   2: mes-
+    offset=   3: 1hbi
+    offset=   4: <y&=
+    offset=   5: -=rb
+    offset=   6: ii-r
+    offset=   7: =6='
+    offset=   8: b&h4
+    offset=   9: rs{+
+  crib=' of ' (assuming it is in Plaintext 1)
+    offset=   0: 'o+1
+    offset=   1:  "w<
+    offset=   2: m~z-
+    offset=   3: 1ski
+    offset=   4: <b/=
+    offset=   5: -&{b
+    offset=   6: ir$r
+    offset=   7: =-4'
+    offset=   8: b=a4
+    offset=   9: rhr+
+  crib=' in ' (assuming it is in Plaintext 1)
+    offset=   0: 'i#1
+    offset=   2: mxr-
+    offset=   3: 1uci
+    offset=   4: <d'=
+    offset=   5: - sb
+    offset=   6: it,r
+    offset=   7: =+<'
+    offset=   8: b;i4
+    offset=   9: rnz+
+    offset=  10: '}e1
+  crib=' that ' (assuming it is in Plaintext 1)
+    offset=   0: 't%ph-
+    offset=   1:  9y}yi
+    offset=   2: metl==
+    offset=   3: 1he(ib
+    offset=   4: <y!|6r
+    offset=   5: -=u#&'
+    offset=   6: ii*3s4
+    offset=   7: =6:f`+
+    offset=   9: rs|jer
+    offset=  10: '`cp&p
+  crib=' you ' (assuming it is in Plaintext 1)
+    offset=   0: 'y"d<
+    offset=   1:  4~i-
+    offset=   2: mhsxi
+    offset=   3: 1eb<=
+    offset=   4: <t&hb
+    offset=   5: -0r7r
+    offset=   6: id-''
+    offset=   7: =;=r4
+    offset=   8: b+ha+
+    offset=   9: r~{~1
+  crib=' for ' (assuming it is in Plaintext 1)
+    offset=   0: 'f"c<
+    offset=   1:  +~n-
+    offset=   3: 1zb;=
+    offset=   4: <k&ob
+    offset=   5: -/r0r
+    offset=   6: i{- '
+    offset=   7: =$=u4
+    offset=   8: b4hf+
+    offset=   9: ra{y1
+    offset=  10: 'rdcr
+  crib=' with ' (assuming it is in Plaintext 1)
+    offset=   0: 'w$et-
+    offset=   1:  :xhei
+    offset=   2: mfuy!=
+    offset=   3: 1kd=ub
+    offset=   4: <z i*r
+    offset=   5: ->t6:'
+    offset=   6: ij+&o4
+    offset=   7: =5;s|+
+    offset=   8: b%n`c1
+    offset=  10: 'cbe:p
+  crib=' is ' (assuming it is in Plaintext 1)
+    offset=   0: 'i>1
+    offset=   1:  $b<
+    offset=   2: mxo-
+    offset=   3: 1u~i
+    offset=   4: <d:=
+    offset=   5: - nb
+    offset=   6: it1r
+    offset=   7: =+!'
+    offset=   8: b;t4
+    offset=   9: rng+
+
+Pair Plaintext 1 ^ Plaintext 3
+  crib=' the ' (assuming it is in Plaintext 1)
+    offset=   0: 's` $
+    offset=   1: '|-a$
+    offset=   2: (1la&
+    offset=   3: eplc:
+    offset=   5: $rrn 
+    offset=   6: &nce0
+    offset=   8: +tx~!
+    offset=   9:  dsdi
+    offset=  10: 0oi,r
+    offset=  11: ;u!7m
+  crib=' and ' (assuming it is in Plaintext 1)
+    offset=   0: 'ff!$
+    offset=   1: 'i+`$
+    offset=   2: ($j`&
+    offset=   3: eejb:
+    offset=   4: $eh~+
+    offset=   5: $gto 
+    offset=   6: &{ed0
+    offset=   7: :jnt;
+    offset=   9:  quei
+    offset=  10: 0zo-r
+  crib=' to ' (assuming it is in Plaintext 1)
+    offset=   0: 'sge
+    offset=   1: '|*$
+    offset=   2: (1k$
+    offset=   3: epk&
+    offset=   4: $pi:
+    offset=   5: $ru+
+    offset=   6: &nd 
+    offset=   9:  dt!
+    offset=  10: 0oni
+    offset=  11: ;u&r
+  crib=' of ' (assuming it is in Plaintext 1)
+    offset=   0: 'hne
+    offset=   1: 'g#$
+    offset=   2: (*b$
+    offset=   3: ekb&
+    offset=   4: $k`:
+    offset=   5: $i|+
+    offset=   6: &um 
+    offset=   7: :df0
+    offset=   8: +ov;
+    offset=  10: 0tgi
+  crib=' in ' (assuming it is in Plaintext 1)
+    offset=   0: 'nfe
+    offset=   1: 'a+$
+    offset=   2: (,j$
+    offset=   3: emj&
+    offset=   4: $mh:
+    offset=   5: $ot+
+    offset=   6: &se 
+    offset=   7: :bn0
+    offset=   8: +i~;
+    offset=   9:  yu!
+  crib=' that ' (assuming it is in Plaintext 1)
+    offset=   0: 's`$p$
+    offset=   1: '|-ep&
+    offset=   2: (1ler:
+    offset=   3: eplgn+
+    offset=   5: $rrjt0
+    offset=   6: &ncad;
+    offset=   8: +txzui
+    offset=   9:  ds`=r
+    offset=  10: 0oi(&m
+    offset=  11: ;u!39<
+  crib=' you ' (assuming it is in Plaintext 1)
+    offset=   0: '~g0$
+    offset=   1: 'q*q$
+    offset=   2: (<kq&
+    offset=   3: e}ks:
+    offset=   4: $}io+
+    offset=   6: &cdu0
+    offset=   7: :roe;
+    offset=   9:  itti
+    offset=  10: 0bn<r
+    offset=  11: ;x&'m
+  crib=' for ' (assuming it is in Plaintext 1)
+    offset=   0: 'ag7$
+    offset=   1: 'n*v$
+    offset=   2: (#kv&
+    offset=   3: ebkt:
+    offset=   4: $bih+
+    offset=   5: $`uy 
+    offset=   6: &|dr0
+    offset=   7: :mob;
+    offset=   9:  vtsi
+    offset=  10: 0}n;r
+  crib=' with ' (assuming it is in Plaintext 1)
+    offset=   0: 'pa1l$
+    offset=   2: (2mpn:
+    offset=   3: esmrr+
+    offset=   4: $sonc 
+    offset=   6: &mbtx;
+    offset=   7: :|ids!
+    offset=   8: +wyoii
+    offset=   9:  gru!r
+    offset=  10: 0lh=:m
+    offset=  11: ;v &%<
+  crib=' is ' (assuming it is in Plaintext 1)
+    offset=   0: 'n{e
+    offset=   1: 'a6$
+    offset=   2: (,w$
+    offset=   3: emw&
+    offset=   4: $mu:
+    offset=   5: $oi+
+    offset=   6: &sx 
+    offset=   7: :bs0
+    offset=   8: +ic;
+    offset=   9:  yh!
+
+Pair Plaintext 2 ^ Plaintext 3
+  crib=' the ' (assuming it is in Plaintext 2)
+    offset=   0:  s-18
+    offset=   1: '1<})
+    offset=   2: e plo
+    offset=   3: tla*'
+    offset=   4: 8}'bi
+    offset=   5: );o,r
+    offset=   6: os!77
+    offset=   7: '=:r/
+    offset=   9: rcgox
+    offset=  10: 7{b= 
+  crib=' and ' (assuming it is in Plaintext 2)
+    offset=   0:  f+08
+    offset=   1: '$:|)
+    offset=   2: e5vmo
+    offset=   3: tyg+'
+    offset=   4: 8h!ci
+    offset=   5: ).i-r
+    offset=   6: of'67
+    offset=   7: '(<s/
+    offset=   8: i3yk*
+    offset=   9: rvanx
+  crib=' to ' (assuming it is in Plaintext 2)
+    offset=   0:  s*t
+    offset=   1: '1;8
+    offset=   2: e w)
+    offset=   3: tlfo
+    offset=   4: 8} '
+    offset=   5: );hi
+    offset=   6: os&r
+    offset=   7: '==7
+    offset=   8: i&x/
+    offset=   9: rc`*
+  crib=' of ' (assuming it is in Plaintext 2)
+    offset=   0:  h#t
+    offset=   1: '*28
+    offset=   2: e;~)
+    offset=   3: twoo
+    offset=   4: 8f)'
+    offset=   5: ) ai
+    offset=   6: oh/r
+    offset=   7: '&47
+    offset=   8: i=q/
+    offset=   9: rxi*
+  crib=' in ' (assuming it is in Plaintext 2)
+    offset=   0:  n+t
+    offset=   1: ',:8
+    offset=   2: e=v)
+    offset=   3: tqgo
+    offset=   4: 8`!'
+    offset=   5: )&ii
+    offset=   6: on'r
+    offset=   7: ' <7
+    offset=   8: i;y/
+    offset=   9: r~a*
+  crib=' that ' (assuming it is in Plaintext 2)
+    offset=   0:  s-5l)
+    offset=   1: '1<y}o
+    offset=   2: e ph;'
+    offset=   3: tla.si
+    offset=   4: 8}'f=r
+    offset=   5: );o(&7
+    offset=   6: os!3c/
+    offset=   7: '=:v{*
+    offset=   9: rcgk, 
+    offset=  10: 7{b9t=
+  crib=' you ' (assuming it is in Plaintext 2)
+    offset=   0:  ~*!8
+    offset=   1: '<;m)
+    offset=   2: e-w|o
+    offset=   3: taf:'
+    offset=   4: 8p ri
+    offset=   5: )6h<r
+    offset=   6: o~&'7
+    offset=   7: '0=b/
+    offset=   8: i+xz*
+    offset=  10: 7ve- 
+  crib=' for ' (assuming it is in Plaintext 2)
+    offset=   0:  a*&8
+    offset=   1: '#;j)
+    offset=   2: e2w{o
+    offset=   3: t~f='
+    offset=   4: 8o ui
+    offset=   5: ))h;r
+    offset=   6: oa& 7
+    offset=   7: '/=e/
+    offset=   8: i4x}*
+    offset=   9: rq`xx
+  crib=' with ' (assuming it is in Plaintext 2)
+    offset=   0:  p, p)
+    offset=   1: '2=lao
+    offset=   2: e#q}''
+    offset=   3: to`;oi
+    offset=   4: 8~&s!r
+    offset=   5: )8n=:7
+    offset=   7: '>;cg*
+    offset=   8: i%~{bx
+    offset=   9: r`f~0 
+    offset=  10: 7xc,h=
+  crib=' is ' (assuming it is in Plaintext 2)
+    offset=   0:  n6t
+    offset=   1: ','8
+    offset=   2: e=k)
+    offset=   3: tqzo
+    offset=   4: 8`<'
+    offset=   5: )&ti
+    offset=   6: on:r
+    offset=   7: ' !7
+    offset=   8: i;d/
+    offset=   9: r~|*

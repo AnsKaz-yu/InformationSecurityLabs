@@ -1,0 +1,5 @@
+Manual mismatch report (manual fixes vs derived key)
+ciphertexts=3 common_len=19563
+Rule: '_' is treated as unknown/mask and is NOT a key constraint.
+
+Mismatches: 0
