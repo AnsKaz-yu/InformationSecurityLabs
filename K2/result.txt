@@ -1,0 +1,21 @@
+=== K2: Two-Time Pad Attack Result ===
+
+Ciphertext length: 19778
+PP offset (Pickwick Papers): 905419
+OT offset (Oliver Twist): 822446
+Match rate (ASCII positions): 4.04%
+
+--- Plaintext 1 (Oliver Twist) ---
+Source: OT[822446:842224]
+the boy actually threw himself, single-handed, upon the strong man, and in the intensity of his energy and the suddenness of his surprise, brought him heavily to the ground. The three spectators seemed quite stupefied. They offered no interference, and the boy and man rolled on the ground together; the former, heedless of the blows that showered upon him, wrenching his hands tighter and tighter in the garments about the murderer's breast, and never ceasing to call for help with all his might. Th
+
+--- Plaintext 2 (Pickwick Papers) ---
+Source: PP[905419:925197]
+progress. Mr. Pickwick slept little that night; his memory had received a very disagreeable refresher on the subject of Mrs. Bardell's action. He breakfasted betimes next morning, and, desiring Sam to accompany him, set forth towards Gray's Inn Square. 'Sam!' said Mr. Pickwick, looking round, when they got to the end of Cheapside. 'Sir?' said Sam, stepping up to his master. 'Which way?' 'Up Newgate Street.' Mr. Pickwick did not turn round immediately, but looked vacantly in Sam's face for a few 
+
+--- 100 consecutive decrypted characters ---
+[P1, pos 0-100]:
+the boy actually threw himself, single-handed, upon the strong man, and in the intensity of his ener
+
+[P2, pos 0-100]:
+progress. Mr. Pickwick slept little that night; his memory had received a very disagreeable refreshe
